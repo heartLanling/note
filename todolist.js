@@ -103,12 +103,24 @@ content.onclick=function(e){
 ////////////////////////////////////添加/////////////////////////////////////////////////////
         let forms=document.forms[0];
         console.dir(forms);
-        let textbtn=forms.elements['content'];
+        let submit=forms.elements['content'];
         let submitBtn=forms.elements[1];
-        submitBtn.onclick=function () {
-            
-        }
-
+        submitBtn.onclick=function (e) {
+            e.preventDefault()
+            // let obj={id:,content:,ctime:,status:false};
+            let obj=creatObj();
+            todolist.push(obj);
+            forms.reset();
+            render(filterDate(type));
+        };
+/////////////////////////creatObj/////////////////////////////////////////
+            function creatObj() {
+                let id=todolist[todolist.length-1].id+1;
+                let content=submit.value;
+                let ctime=new Date().toLocaleDateString();
+                let status=false;
+                return {id,content,ctime,status}
+            }
 ////////////////////////////////////////////////////////////////////////////////////////
             function filterDate(type) {
                 let arr=[];
